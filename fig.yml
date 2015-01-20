@@ -1,14 +1,15 @@
 zookeeper:
   image: wurstmeister/zookeeper
   ports: 
-    - "2181"
+    - "2181:2181"
 kafka:
-  image: wurstmeister/kafka:0.8.1.1-1
+  image: akhil/kafka-docker:0.8.1.1
   ports:
-    - "9092"
+    - "9092:9092"
   links: 
     - zookeeper:zk
   environment:
-    KAFKA_ADVERTISED_HOST_NAME: 192.168.59.103
+    KAFKA_ADVERTISED_HOST_NAME: 172.27.3.5
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+  command: start-kafka.sh
